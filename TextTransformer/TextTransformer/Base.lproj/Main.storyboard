@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11134" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -673,45 +675,89 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="TextTransformer" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="R2V-B0-nI4">
-            <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <connections>
-                            <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
-                    </connections>
-                </windowController>
-                <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="75" y="250"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="TextTransformer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="143"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z9D-aP-qIc">
+                                <rect key="frame" x="20" y="102" width="440" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="QHq-o2-pEt">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JNX-9y-N8r">
+                                <rect key="frame" x="20" y="20" width="360" height="21"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="hry-Ea-9Yf">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="output:" target="XfG-lQ-9wD" id="FWb-XH-hc9"/>
+                                </connections>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ksV-h7-Mz6">
+                                <rect key="frame" x="394" y="13" width="72" height="32"/>
+                                <buttonCell key="cell" type="push" title="Copy" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ieL-ib-Vnq">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="copyToPastboard:" target="XfG-lQ-9wD" id="TtI-k9-39h"/>
+                                </connections>
+                            </button>
+                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lEy-I4-ykx">
+                                <rect key="frame" x="18" y="59" width="444" height="24"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="Uut-oM-u7j">
+                                    <font key="font" metaFont="system"/>
+                                    <segments>
+                                        <segment label="ROT13"/>
+                                        <segment label="Similar" selected="YES" tag="1"/>
+                                        <segment label="Strikethrough"/>
+                                        <segment label="Zalgo"/>
+                                    </segments>
+                                </segmentedCell>
+                                <connections>
+                                    <action selector="typeChanged:" target="XfG-lQ-9wD" id="LeL-rg-iAj"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ksV-h7-Mz6" secondAttribute="trailing" constant="20" id="1Cq-Jz-o37"/>
+                            <constraint firstItem="lEy-I4-ykx" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="30O-kg-kug"/>
+                            <constraint firstItem="z9D-aP-qIc" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="D3d-v0-Hqx"/>
+                            <constraint firstItem="z9D-aP-qIc" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="HJc-lU-cWT"/>
+                            <constraint firstAttribute="trailing" secondItem="lEy-I4-ykx" secondAttribute="trailing" constant="20" id="Hul-Eq-yti"/>
+                            <constraint firstItem="ksV-h7-Mz6" firstAttribute="centerY" secondItem="JNX-9y-N8r" secondAttribute="centerY" id="MSO-VX-tAz"/>
+                            <constraint firstAttribute="trailing" secondItem="z9D-aP-qIc" secondAttribute="trailing" constant="20" id="MrW-ZM-3Hn"/>
+                            <constraint firstItem="lEy-I4-ykx" firstAttribute="top" secondItem="z9D-aP-qIc" secondAttribute="bottom" constant="20" id="UJN-Nv-2MN"/>
+                            <constraint firstItem="JNX-9y-N8r" firstAttribute="top" secondItem="lEy-I4-ykx" secondAttribute="bottom" constant="20" id="ZbW-RX-G6i"/>
+                            <constraint firstAttribute="bottom" secondItem="JNX-9y-N8r" secondAttribute="bottom" constant="20" id="cpa-4B-kHT"/>
+                            <constraint firstItem="JNX-9y-N8r" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="pae-QU-Tzx"/>
+                            <constraint firstItem="ksV-h7-Mz6" firstAttribute="leading" secondItem="JNX-9y-N8r" secondAttribute="trailing" constant="20" id="pv4-ds-2bn"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="input" destination="z9D-aP-qIc" id="5TW-4l-Qsx"/>
+                        <outlet property="output" destination="JNX-9y-N8r" id="1Hu-jV-7f0"/>
+                        <outlet property="type" destination="Uut-oM-u7j" id="jgp-ev-9t6"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="73" y="208"/>
         </scene>
     </scenes>
 </document>
