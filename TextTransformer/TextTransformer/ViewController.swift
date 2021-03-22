@@ -13,6 +13,8 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var type: NSSegmentedCell!
     @IBOutlet weak var input: NSTextField!
     
+    let zalgoChars = ZalgoCharacters()
+    
     
     @IBAction func typeChanged(_ sender: Any) {
         switch type.selectedSegment {
@@ -58,14 +60,43 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     }
     
     func similar(_ input: String) -> String {
-        return "Similar: " + input
+        var output = input
+        output = output.replacingOccurrences(of: "a", with: "а")
+        output = output.replacingOccurrences(of: "e", with: "е")
+        output = output.replacingOccurrences(of: "i", with: "і")
+        output = output.replacingOccurrences(of: "o", with: "о")
+        output = output.replacingOccurrences(of: "p", with: "р")
+        return output
     }
     
     func zalgo(_ input: String) -> String {
-        return "Zalgo: " + input
+        var output = ""
+        
+        for letter in input {
+            output.append(letter)
+            for _ in 1...Int.random(in: 1...8) {
+                output.append(zalgoChars.above.randomElement()!)
+            }
+            
+            for _ in 1...Int.random(in: 1...4) {
+                output.append(zalgoChars.inline.randomElement()!)
+            }
+            
+            for _ in 1...Int.random(in: 1...8) {
+                output.append(zalgoChars.above.randomElement()!)
+            }
+            
+            for _ in 1...Int.random(in: 1...8) {
+                output.append(zalgoChars.below.randomElement()!)
+            }
+        }
+        
+        return output
     }
 
     @IBAction func copyToPastboard(_ sender: Any) {
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(output.stringValue, forType: .string)
     }
 
 }
