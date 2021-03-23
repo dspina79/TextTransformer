@@ -31,7 +31,6 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         typeChanged(self)
     }
 
@@ -98,6 +97,5 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(output.stringValue, forType: .string)
     }
-
 }
 
